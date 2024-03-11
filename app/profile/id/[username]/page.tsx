@@ -1,3 +1,4 @@
+import Back from '@/components/Back';
 import axios from 'axios';
 
 export default async function Page({ params }: { params: { username: string } }) {
@@ -13,14 +14,14 @@ export default async function Page({ params }: { params: { username: string } })
   return (
     <div className="px-5 mt-4">
       <div className="my-2">
-        <button className="text-sm">{'<'} back</button>
+        <Back />
       </div>
       {data.success ? (<div className="border-b pb-2 border-slate-800 select-none">
         <div className="pb-4 pt-8 flex gap-5">
           <img className="w-28 rounded-full" src="https://www.sony.eu/alphauniverse/assets/resized/2020/10/Julien-Mauve-profile_square_291x291.jpg" alt="user" />
           <div className="flex flex-1 flex-col justify-center">
               <p className="text-2xl font-extrabold">{data.user.name}</p>
-              <p className="text-lg font-extrabold">{data.user.username}</p>
+              <p className="text-lg font-semibold">@{data.user.username}</p>
               <p className="text-md font-semibold text-slate-300">{data.user.bio}</p>
           </div>
           <div className="flex items-center justify-center">

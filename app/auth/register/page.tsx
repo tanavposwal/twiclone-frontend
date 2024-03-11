@@ -1,14 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [displayname, setDisplayname] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter()
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
@@ -21,6 +23,7 @@ export default function Home() {
       if (response.data.success) {
         console.log("Login successful");
         localStorage.setItem("token", response.data.token)
+        router.push("/")
       } else {
         console.error("Login failed");
       }
