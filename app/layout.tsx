@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import RecoidContextProvider from "@/components/recoilContextProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div className="mx-auto max-w-4xl pt-14">
+        <div className="mx-auto max-w-4xl pt-16">
+        <RecoidContextProvider>
           <Navbar />
-          {children}
+          <div className="main">{children}</div>
+        </RecoidContextProvider>
         </div>
       </body>
     </html>

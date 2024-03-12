@@ -14,6 +14,6 @@ export default function Like({ hash }: {hash: string}) {
     }
 
     return (
-        <button className="text-red-400 text-xl" onClick={() => like()}><FiHeart /></button>
+        <button className="text-xl hover:scale-125 transition" onClick={() => like()}><FiHeart className="stroke-red-400 fill-red-400 hover:stroke-red-500 hover:fill-red-500 transition-colors" /></button>
     )
 }

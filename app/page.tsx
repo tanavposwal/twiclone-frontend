@@ -1,6 +1,10 @@
-import Image from "next/image";
+'use client';
+import { useRecoilState } from 'recoil';
+import { loginState } from '@/recoil/recoilState';
 
 export default function Home() {
+  const [logged, setLogged] = useRecoilState(loginState);
+
   return (
     <>
     <div className="flex gap-4">

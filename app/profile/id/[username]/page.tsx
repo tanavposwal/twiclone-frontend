@@ -1,5 +1,6 @@
 import Back from '@/components/Back';
 import axios from 'axios';
+import { HiBadgeCheck } from "react-icons/hi";
 
 export default async function Page({ params }: { params: { username: string } }) {
   
@@ -21,7 +22,11 @@ export default async function Page({ params }: { params: { username: string } })
           <img className="w-28 rounded-full" src="https://www.sony.eu/alphauniverse/assets/resized/2020/10/Julien-Mauve-profile_square_291x291.jpg" alt="user" />
           <div className="flex flex-1 flex-col justify-center">
               <p className="text-2xl font-extrabold">{data.user.name}</p>
+              <div className='flex items-center gap-2'>
               <p className="text-lg font-semibold">@{data.user.username}</p>
+              {data.user.verified &&
+              <span className='text-2xl'><HiBadgeCheck className='fill-blue-500' /></span>}
+              </div>
               <p className="text-md font-semibold text-slate-300">{data.user.bio}</p>
           </div>
           <div className="flex items-center justify-center">

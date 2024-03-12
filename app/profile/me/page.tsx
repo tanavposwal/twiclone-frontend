@@ -2,9 +2,15 @@
 
 import Back from "@/components/Back";
 import axios from "axios";
+import Link from "next/link";
 import { useState, useEffect } from "react";
+import { HiBadgeCheck } from "react-icons/hi";
+import { TbUserEdit } from "react-icons/tb";
+import { useRecoilState } from 'recoil';
+import { loginState } from '@/recoil/recoilState';
 
 export default function Home() {
+  const [logged, setLogged] = useRecoilState(loginState);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<{
     success: boolean;
@@ -15,6 +21,7 @@ export default function Home() {
       bio: string;
       followers: string;
       following: string;
+      verified: boolean;
     };
   }>({
     success: false,
@@ -25,6 +32,7 @@ export default function Home() {
       bio: "",
       followers: "",
       following: "",
+      verified: false,
     },
   });
 
@@ -51,6 +59,7 @@ export default function Home() {
         <Back />
       </div>
 
+      {logged ? (
       <div className="border-b pb-2 border-slate-800 select-none">
         <div className="pb-4 pt-8 flex gap-5">
           {loading ? (
@@ -68,8 +77,19 @@ export default function Home() {
               <div className="animate-pulse bg-slate-800 w-48 h-28 rounded-lg mb-2"></div>
             ) : (
               <div>
+                <div className="flex items-center gap-2">
                 <p className="text-2xl font-extrabold">{data.user.name}</p>
-                <p className="text-lg font-semibold">@{data.user.username}</p>
+                <Link href="/profile/edit">
+                <TbUserEdit className="text-xl hover:stroke-slate-500 transition-colors" /></Link>
+                </div>
+                <div className="flex items-center gap-2">
+                  <p className="text-lg font-semibold">@{data.user.username}</p>
+                  {data.user.verified && (
+                    <span className="text-2xl">
+                      <HiBadgeCheck className="fill-blue-500" />
+                    </span>
+                  )}
+                </div>
                 <p className="text-md font-semibold text-slate-300">
                   {data.user.bio}
                 </p>
@@ -100,7 +120,13 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        <button className="px-4 py-2 border-2 border-red-500 rounded-xl hover:bg-red-500 transition" onClick={() => {
+          localStorage.removeItem("token")
+          setLogged(false)
+        }}>Log out</button>
       </div>
+      ): "not logged in!"}
     </div>
   );
 }

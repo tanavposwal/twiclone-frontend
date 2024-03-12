@@ -3,8 +3,12 @@
 import { FormEvent, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { useRecoilState } from 'recoil';
+import { loginState } from '@/recoil/recoilState';
 
 export default function Home() {
+  const [logged, setLogged] = useRecoilState(loginState);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter()
@@ -21,6 +25,7 @@ export default function Home() {
       if (response.data.success ) {
         console.log("Login successful");
         localStorage.setItem("token", response.data.token)
+        setLogged(true)
         router.push("/")
       } else {
         console.error("Login failed");
@@ -54,6 +59,9 @@ export default function Home() {
         <button className="px-4 py-2 bg-green-500 rounded hover:bg-green-600 transition" type="submit">
           Log in
         </button>
+        <p className="opacity-65">
+          not register <Link className="text-blue-500 underline" href="/auth/register">Create an account</Link>
+        </p>
       </form>
     </div>
   );
