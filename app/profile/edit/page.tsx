@@ -96,20 +96,6 @@ export default function Home() {
             </p>
           )}
         </div>
-        {loading ? (
-          <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full mb-2"></div>
-        ) : (
-          <div className="flex gap-4 divide-x-2 divide-gray-600">
-            <div className="flex gap-2">
-              <p>{data.user.followers}</p>
-              <p>followers</p>
-            </div>
-            <div className="flex gap-2 pl-4">
-              <p>{data.user.following}</p>
-              <p>following</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -23,7 +23,6 @@ export default function Home() {
         username,
         password,
       });
-
       if (response.data.success) {
         console.log("Login successful");
         localStorage.setItem("token", response.data.token)
