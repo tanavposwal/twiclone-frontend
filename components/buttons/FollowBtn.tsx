@@ -58,7 +58,7 @@ export default function FollowBtn({ user }: { user: string }) {
           {follower ? (
             <div>
               <button
-                className="px-4 py-1 bg-red-500 rounded-full text-white hover:bg-red-400 transition"
+                className="px-4 py-1 border-2 border-red-500 text-red-500 rounded-full hover:bg-red-400/25 transition"
                 onClick={() => {UnFollow()}}
               >
                 Unfollow

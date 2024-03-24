@@ -45,10 +45,10 @@ export default async function Page({ params }: { params: { hash: string } }) {
           </div>
           <div className="my-2 text-lg">{data.post.content}</div>
           {data.post.image && (
-            <div className="w-full flex items-center justify-center">
+            <div className="w-full flex items-center justify-center border border-slate-600 rounded-lg">
               <img
                 src={data.post.image}
-                className="aspect-auto border border-slate-600 rounded-lg max-h-48"
+                className="aspect-auto max-h-48"
                 alt=""
               />
             </div>
