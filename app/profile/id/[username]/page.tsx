@@ -28,7 +28,7 @@ export default async function Page({
           <div className="pb-4 pt-8 flex gap-5">
             <img
               className="w-28 rounded-full"
-              src="https://www.sony.eu/alphauniverse/assets/resized/2020/10/Julien-Mauve-profile_square_291x291.jpg"
+              src={data.user.image}
               alt="user"
             />
             <div className="flex flex-1 flex-col justify-center">

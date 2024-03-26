@@ -1,13 +1,12 @@
 "use client";
-
 import Back from "@/components/Back";
 import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { HiBadgeCheck } from "react-icons/hi";
 import { TbUserEdit } from "react-icons/tb";
-import { useRecoilState } from 'recoil';
-import { loginState } from '@/recoil/recoilState';
+import { useRecoilState } from "recoil";
+import { loginState } from "@/recoil/recoilState";
 
 export default function Home() {
   const [logged, setLogged] = useRecoilState(loginState);
@@ -15,6 +14,7 @@ export default function Home() {
   const [data, setData] = useState<{
     success: boolean;
     user: {
+      image: string;
       name: string;
       username: string;
       since: string;
@@ -26,6 +26,7 @@ export default function Home() {
   }>({
     success: false,
     user: {
+      image: "",
       name: "",
       username: "",
       since: "",
@@ -55,78 +56,89 @@ export default function Home() {
 
   return (
     <div className="px-5 mt-4">
+
       <div className="my-2">
         <Back />
       </div>
 
       {logged ? (
-      <div className="border-b pb-2 border-slate-800 select-none">
-        <div className="pb-4 pt-8 flex gap-5">
-          {loading ? (
-            <div className="w-28 h-28 rounded-full animate-pulse bg-slate-800"></div>
-          ) : (
-            <img
-              className="w-28 rounded-full"
-              src="https://www.sony.eu/alphauniverse/assets/resized/2020/10/Julien-Mauve-profile_square_291x291.jpg"
-              alt="user"
-            />
-          )}
-
-          <div className="flex flex-1 flex-col justify-center">
+        <div className="border-b pb-2 border-slate-800 select-none">
+          <div className="pb-4 pt-8 flex gap-5">
             {loading ? (
-              <div className="animate-pulse bg-slate-800 w-48 h-28 rounded-lg mb-2"></div>
+              <div className="w-28 h-28 rounded-full animate-pulse bg-slate-800"></div>
             ) : (
-              <div>
-                <div className="flex items-center gap-2">
-                <p className="text-2xl font-extrabold">{data.user.name}</p>
-                <Link href="/profile/edit">
-                <TbUserEdit className="text-xl hover:stroke-slate-500 transition-colors" /></Link>
+              <img
+                className="w-28 rounded-full"
+                src={data.user.image}
+                alt="user"
+              />
+            )}
+
+            <div className="flex flex-1 flex-col justify-center">
+              {loading ? (
+                <div className="animate-pulse bg-slate-800 w-48 h-28 rounded-lg mb-2"></div>
+              ) : (
+                <div>
+                  <div className="flex items-center gap-2">
+                    <p className="text-2xl font-extrabold">{data.user.name}</p>
+                    <Link href="/profile/edit">
+                      <TbUserEdit className="text-xl hover:stroke-slate-500 transition-colors" />
+                    </Link>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <p className="text-lg font-semibold">
+                      @{data.user.username}
+                    </p>
+                    {data.user.verified && (
+                      <span className="text-2xl">
+                        <HiBadgeCheck className="fill-blue-500" />
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-md font-semibold text-slate-300">
+                    {data.user.bio}
+                  </p>
                 </div>
-                <div className="flex items-center gap-2">
-                  <p className="text-lg font-semibold">@{data.user.username}</p>
-                  {data.user.verified && (
-                    <span className="text-2xl">
-                      <HiBadgeCheck className="fill-blue-500" />
-                    </span>
-                  )}
-                </div>
-                <p className="text-md font-semibold text-slate-300">
-                  {data.user.bio}
-                </p>
-              </div>
+              )}
+            </div>
+          </div>
+          <div className="py-2">
+            {loading ? (
+              <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full"></div>
+            ) : (
+              <p className="text-slate-400">
+                joined {data.user.since.substring(0, 10)}
+              </p>
             )}
           </div>
-        </div>
-        <div className="py-2">
           {loading ? (
-            <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full"></div>
+            <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full mb-2"></div>
           ) : (
-            <p className="text-slate-400">
-              joined {data.user.since.substring(0, 10)}
-            </p>
+            <div className="flex gap-4 divide-x-2 divide-gray-600">
+              <div className="flex gap-2">
+                <p>{data.user.followers}</p>
+                <p>followers</p>
+              </div>
+              <div className="flex gap-2 pl-4">
+                <p>{data.user.following}</p>
+                <p>following</p>
+              </div>
+            </div>
           )}
-        </div>
-        {loading ? (
-          <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full mb-2"></div>
-        ) : (
-          <div className="flex gap-4 divide-x-2 divide-gray-600">
-            <div className="flex gap-2">
-              <p>{data.user.followers}</p>
-              <p>followers</p>
-            </div>
-            <div className="flex gap-2 pl-4">
-              <p>{data.user.following}</p>
-              <p>following</p>
-            </div>
-          </div>
-        )}
 
-        <button className="px-4 py-2 border-2 border-red-500 rounded-xl hover:bg-red-500 transition" onClick={() => {
-          localStorage.removeItem("token")
-          setLogged(false)
-        }}>Log out</button>
-      </div>
-      ): "not logged in!"}
+          <button
+            className="px-4 py-2 border-2 border-red-500 rounded-xl hover:bg-red-500 transition"
+            onClick={() => {
+              localStorage.removeItem("token");
+              setLogged(false);
+            }}
+          >
+            Log out
+          </button>
+        </div>
+      ) : (
+        "not logged in!"
+      )}
     </div>
   );
 }

@@ -43,11 +43,11 @@ export default function Me() {
       {logged ? (
         <div>
         {verify ? (<Link href={"/profile/me"} className="bg-gradient-to-br
-        from-purple-600 to-orange-500 w-12 h-12 rounded-full flex items-center justify-center">
-          <img className="w-10 h-10 rounded-full ring-2 ring-black" src={image} />
+        from-purple-600 to-orange-500 w-10 h-10 rounded-full flex items-center justify-center">
+          <img className="w-8 h-8 rounded-full ring-2 ring-black" src={image} />
         </Link>) : 
-          (<Link href={"/profile/me"} className="w-12 h-12 rounded-full flex items-center justify-center">
-          <img className="w-10 h-10 rounded-full ring-2 ring-black" src={image} />
+          (<Link href={"/profile/me"} className="w-10 h-10 rounded-full flex items-center justify-center">
+          <img className="w-8 h-8 rounded-full ring-2 ring-black" src={image} />
         </Link>)
         }
         </div>

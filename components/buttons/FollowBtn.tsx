@@ -62,7 +62,7 @@ export default function FollowBtn({ user }: { user: string }) {
                 onClick={() => {UnFollow()}}
               >
                 Unfollow
-              </button>{" "}
+              </button>
             </div>
           ) : (
             <div>
