@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: { hash: string } }) {
             </div>
           )}
 
-          <div className="text-sm text-slate-400 py-2">
+          <div className="text-sm text-slate-600 py-2">
             {data.post.likes} likes | {data.post.time.substring(0, 10)}
           </div>
           <div className="py-3 border-t border-slate-700 flex justify-evenly">

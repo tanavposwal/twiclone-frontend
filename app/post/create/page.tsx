@@ -10,7 +10,7 @@ export default function Home() {
     const [url, setUrl] = useState<string>("")
 
     return (
-        <div className="border-b border-slate-700 px-5 mt-4">
+        <div className="px-3 mt-4">
         <div className="my-2">
             <Back />
         </div>
@@ -18,21 +18,25 @@ export default function Home() {
             <p>Write a post.</p>
         </div>
         <textarea className="w-full h-48  border border-slate-600 rounded-lg my-3 py-2 px-3 outline-none hover:border-slate-400 transition" value={content} onChange={e => setContent(e.target.value)}></textarea>
-        <div className="image flex gap-3 border rounded-lg border-slate-600 mb-5 p-2 items-center justify-center">
-        <input type="url" placeholder="url to image" className="outline-none px-2   border border-slate-400 rounded-md py-1"  value={image} onChange={e => setImage(e.target.value)} />
-        <button className="hover:text-slate-300 transition border border-slate-400 rounded-md px-2 py-1" onClick={() => setUrl(image)}>add</button>
-        <img className="h-12 rounded-md border border-slate-500 max-w-lg" src={url} />
+
+        <div className="image flex gap-3 bg-slate-600/30 rounded-lg mb-5 p-2 items-center justify-center">
+        <input type="url" placeholder="url to image" className="outline-none px-2 border border-slate-600 rounded-md py-1"  value={image} onChange={e => setImage(e.target.value)} />
+        <button className="hover:text-slate-300 transition border border-slate-600 hover:border-slate-400 rounded-md px-2 py-1" onClick={() => setUrl(image)}>add</button>
+        <img className="h-12 rounded-md max-w-lg" src={url} />
         </div>
         <button className="px-4 py-2 mb-4 bg-white rounded-full text-black hover:bg-slate-300 border border-slate-400 transition" onClick={async () => {
             try {
                 const response = await axios.post("https://twiclone-api-production.up.railway.app/post/create", {content, image}, { headers: {
                     "authorization": localStorage.getItem("token"),
                 } });
-                console.log('Response:', response.data);
-                // Handle the response data here
+                
+                setContent("")
+                setUrl("")
+                setImage("")
+                alert("Post published")
               } catch (error) {
-                console.error('Error:', error);
-                // Handle errors here
+                alert("Contact developer a bug found.")
+                //console.error('Error:', error);
               }
         }}>Publish</button>
     </div>

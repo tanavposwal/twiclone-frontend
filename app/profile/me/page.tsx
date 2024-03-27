@@ -4,9 +4,10 @@ import axios from "axios";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { HiBadgeCheck } from "react-icons/hi";
-import { TbUserEdit } from "react-icons/tb";
+import { FaUserEdit } from "react-icons/fa";
 import { useRecoilState } from "recoil";
 import { loginState } from "@/recoil/recoilState";
+import { IoLogOut } from "react-icons/io5";
 
 export default function Home() {
   const [logged, setLogged] = useRecoilState(loginState);
@@ -27,12 +28,12 @@ export default function Home() {
     success: false,
     user: {
       image: "",
-      name: "",
-      username: "",
-      since: "",
-      bio: "",
-      followers: "",
-      following: "",
+      name: "twiclone user",
+      username: "a.user",
+      since: "2000-12-29",
+      bio: "a user of twi clone.",
+      followers: "99",
+      following: "999",
       verified: false,
     },
   });
@@ -62,82 +63,63 @@ export default function Home() {
       </div>
 
       {logged ? (
-        <div className="border-b pb-2 border-slate-800 select-none">
-          <div className="pb-4 pt-8 flex gap-5">
-            {loading ? (
-              <div className="w-28 h-28 rounded-full animate-pulse bg-slate-800"></div>
-            ) : (
-              <img
-                className="w-28 rounded-full"
-                src={data.user.image}
-                alt="user"
-              />
-            )}
-
+        <div className="border-b pb-2 px-6 border-slate-800 select-none">
+          <div className="pb-4 pt-8 flex flex-col gap-3">
+            {loading ?
+            <div className="w-28 h-28 rounded-full bg-slate-800 animate-pulse"></div> :
+            <img
+              className="w-28 rounded-full"
+              src={data.user.image}
+              alt="user"
+            />  
+            }
+            <div className={"flex "+ (loading ? "blur-sm" : "")}>
             <div className="flex flex-1 flex-col justify-center">
-              {loading ? (
-                <div className="animate-pulse bg-slate-800 w-48 h-28 rounded-lg mb-2"></div>
-              ) : (
-                <div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-2xl font-extrabold">{data.user.name}</p>
-                    <Link href="/profile/edit">
-                      <TbUserEdit className="text-xl hover:stroke-slate-500 transition-colors" />
-                    </Link>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-lg font-semibold">
-                      @{data.user.username}
-                    </p>
-                    {data.user.verified && (
-                      <span className="text-2xl">
-                        <HiBadgeCheck className="fill-blue-500" />
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-md font-semibold text-slate-300">
-                    {data.user.bio}
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="py-2">
-            {loading ? (
-              <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full"></div>
-            ) : (
-              <p className="text-slate-400">
-                joined {data.user.since.substring(0, 10)}
+              <p className="text-2xl font-extrabold">{data.user.name}</p>
+              <div className="flex items-center gap-1">
+                <p className="text-md font-medium">@{data.user.username}</p>
+                {data.user.verified && (
+                  <span className="text-xl">
+                    <HiBadgeCheck className="fill-blue-500" />
+                  </span>
+                )}
+              </div>
+              <p className="text-md font-semibold text-slate-300">
+                {data.user.bio}
               </p>
-            )}
-          </div>
-          {loading ? (
-            <div className="animate-pulse bg-slate-800 w-48 h-4 rounded-full mb-2"></div>
-          ) : (
-            <div className="flex gap-4 divide-x-2 divide-gray-600">
-              <div className="flex gap-2">
-                <p>{data.user.followers}</p>
-                <p>followers</p>
-              </div>
-              <div className="flex gap-2 pl-4">
-                <p>{data.user.following}</p>
-                <p>following</p>
-              </div>
             </div>
-          )}
+            </div>
+          </div>
+          
+          <div className="text-sm">
+            <p className={"text-slate-400 "+ (loading && "blur-sm")}>
+              joined {data.user.since.substring(0, 10)}
+            </p>
+          </div>
+          <div className={"flex gap-2 divide-slate-400 text-sm text-slate-400 " + (loading && "blur-sm")}>
+            <div className="flex gap-2 text-slate-400">
+              <p className="text-slate-400">{data.user.followers}</p>
+              <p className="text-slate-400">followers</p>
+            </div>
+            <p className="text-slate-400">•</p>
+            <div className="flex gap-2 text-slate-400">
+              <p className="text-slate-400">{data.user.following}</p>
+              <p className="text-slate-400">following</p>
+            </div>
+          </div>
 
-          <button
-            className="px-4 py-2 border-2 border-red-500 rounded-xl hover:bg-red-500 transition"
-            onClick={() => {
+          <div className={"py-4 flex gap-4 " +  (loading && "blur-sm")}>
+            <button onClick={() => {
               localStorage.removeItem("token");
               setLogged(false);
-            }}
-          >
-            Log out
-          </button>
+            }} className="w-10 h-10 flex rounded-full hover:bg-red-600/20 bg-white/20 group items-center justify-center text-2xl transition-colors"><IoLogOut className="bg-transparent group-hover:fill-red-500 transition-colors" /></button>
+            <button className="w-10 h-10 flex rounded-full hover:bg-blue-600/20 bg-white/20 group items-center justify-center text-xl transition-colors"><FaUserEdit className="bg-transparent group-hover:fill-blue-500 transition-colors" /></button>
+          </div>
         </div>
       ) : (
-        "not logged in!"
+        <div className="h-56 w-full flex items-center justify-center">
+          Login to continue
+        </div>
       )}
     </div>
   );
