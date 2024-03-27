@@ -12,11 +12,11 @@ export default async function Page({ params }: { params: { hash: string } }) {
       image: ""
     },
   };
-  const req = await axios.get(`http://localhost:3001/post/${params.hash}`);
+  const req = await axios.get(`https://twiclone-api-production.up.railway.app/post/${params.hash}`);
   const data = req.data;
   if (data.success) {
     info = await axios.get(
-      `http://localhost:3001/user/${data.post.author}/info`
+      `https://twiclone-api-production.up.railway.app/user/${data.post.author}/info`
     );
   }
   return (

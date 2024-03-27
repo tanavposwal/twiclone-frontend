@@ -13,7 +13,7 @@ export default function Me() {
 
   async function getInfo() {
     axios.get(
-      "http://localhost:3001/user/me/info",
+      "https://twiclone-api-production.up.railway.app/user/me/info",
       {
         headers: {
           authorization: localStorage.getItem("token"),

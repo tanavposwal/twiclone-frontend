@@ -4,7 +4,7 @@ import { FiHeart } from "react-icons/fi";
 
 export default function Like({ hash }: {hash: string}) {
     async function like() {
-        const req = await axios.get(`http://localhost:3001/post/${hash}/like`, { headers: {
+        const req = await axios.get(`https://twiclone-api-production.up.railway.app/post/${hash}/like`, { headers: {
             "authorization": localStorage.getItem('token')
         }});
         const data = req.data;

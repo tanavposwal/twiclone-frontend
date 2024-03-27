@@ -25,7 +25,7 @@ export default function Home() {
         </div>
         <button className="px-4 py-2 mb-4 bg-white rounded-full text-black hover:bg-slate-300 border border-slate-400 transition" onClick={async () => {
             try {
-                const response = await axios.post("http://localhost:3001/post/create", {content, image}, { headers: {
+                const response = await axios.post("https://twiclone-api-production.up.railway.app/post/create", {content, image}, { headers: {
                     "authorization": localStorage.getItem("token"),
                 } });
                 console.log('Response:', response.data);

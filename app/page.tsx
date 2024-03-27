@@ -4,7 +4,7 @@ import Link from "next/link";
 import { HiBadgeCheck } from "react-icons/hi";
 
 export default async function Home() {
-  const res = await axios.get(`http://localhost:3001/post/`);
+  const res = await axios.get(`https://twiclone-api-production.up.railway.app/post/`);
   return (
     <div className="flex flex-col">
       <div className="fixed bottom-10 right-10">

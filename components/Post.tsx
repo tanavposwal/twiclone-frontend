@@ -9,7 +9,7 @@ export default async function Post({ post }: {post: any}) {
       image: "",
     }
     const res = await axios.get(
-      `http://localhost:3001/user/${post.username}/info`
+      `https://twiclone-api-production.up.railway.app/user/${post.username}/info`
     );
     info = res.data
 

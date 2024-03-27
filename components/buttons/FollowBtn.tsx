@@ -9,7 +9,7 @@ export default function FollowBtn({ user }: { user: string }) {
   const [follower, setFollower] = useState(false);
   async function Follow() {
     try {
-      const res = await axios.get(`http://localhost:3001/user/${user}/follow`, {
+      const res = await axios.get(`https://twiclone-api-production.up.railway.app/user/${user}/follow`, {
         headers: {
           authorization: localStorage.getItem("token"),
         },
@@ -22,7 +22,7 @@ export default function FollowBtn({ user }: { user: string }) {
   async function UnFollow() {
     try {
       const res = await axios.get(
-        `http://localhost:3001/user/${user}/unfollow`,
+        `https://twiclone-api-production.up.railway.app/user/${user}/unfollow`,
         {
           headers: {
             authorization: localStorage.getItem("token"),
@@ -37,7 +37,7 @@ export default function FollowBtn({ user }: { user: string }) {
 
   async function load() {
     const res = await axios.get(
-      `http://localhost:3001/user/${user}/followstat`,
+      `https://twiclone-api-production.up.railway.app/user/${user}/followstat`,
       {
         headers: {
           authorization: localStorage.getItem("token"),

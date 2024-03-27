@@ -18,7 +18,7 @@ export default function Home() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3001/user/register", {
+      const response = await axios.post("https://twiclone-api-production.up.railway.app/user/register", {
         displayName: displayname,
         username,
         password,

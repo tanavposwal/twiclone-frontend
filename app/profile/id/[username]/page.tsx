@@ -11,7 +11,7 @@ export default async function Page({
   let data;
   try {
     const res = await axios.get(
-      `http://localhost:3001/user/id/${params.username}`
+      `https://twiclone-api-production.up.railway.app/user/id/${params.username}`
     );
     data = res.data;
   } catch (err) {

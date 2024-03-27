@@ -37,7 +37,7 @@ export default function Home() {
 
   function reload() {
     axios
-      .get("http://localhost:3001/user/me", {
+      .get("https://twiclone-api-production.up.railway.app/user/me", {
         headers: {
           authorization: localStorage.getItem("token"),
         },
