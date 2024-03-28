@@ -1,7 +1,6 @@
 "use client";
 import Back from "@/components/Back";
 import axios from "axios";
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { HiBadgeCheck } from "react-icons/hi";
 import { FaUserEdit } from "react-icons/fa";
@@ -12,19 +11,7 @@ import { IoLogOut } from "react-icons/io5";
 export default function Home() {
   const [logged, setLogged] = useRecoilState(loginState);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<{
-    success: boolean;
-    user: {
-      image: string;
-      name: string;
-      username: string;
-      since: string;
-      bio: string;
-      followers: string;
-      following: string;
-      verified: boolean;
-    };
-  }>({
+  const [data, setData] = useState({
     success: false,
     user: {
       image: "",
@@ -73,7 +60,7 @@ export default function Home() {
               alt="user"
             />  
             }
-            <div className={"flex "+ (loading ? "blur-sm" : "")}>
+            <div className={"flex "+ (loading &&"blur-sm animate-pulse")}>
             <div className="flex flex-1 flex-col justify-center">
               <p className="text-2xl font-extrabold">{data.user.name}</p>
               <div className="flex items-center gap-1">
@@ -92,7 +79,7 @@ export default function Home() {
           </div>
           
           <div className="text-sm">
-            <p className={"text-slate-400 "+ (loading && "blur-sm")}>
+            <p className={"text-slate-400 "+ (loading && "blur-sm  animate-pulse")}>
               joined {data.user.since.substring(0, 10)}
             </p>
           </div>

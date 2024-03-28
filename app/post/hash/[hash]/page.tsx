@@ -1,3 +1,4 @@
+"use client";
 import Back from "@/components/Back";
 import Like from "@/components/buttons/Like";
 import axios from "axios";
@@ -12,7 +13,9 @@ export default async function Page({ params }: { params: { hash: string } }) {
       image: ""
     },
   };
-  const req = await axios.get(`https://twiclone-api-production.up.railway.app/post/${params.hash}`);
+  const req = await axios.get(`https://twiclone-api-production.up.railway.app/post/${params.hash}`, { headers: {
+    "authorization": localStorage.getItem("token"),
+} });
   const data = req.data;
   if (data.success) {
     info = await axios.get(
@@ -54,11 +57,11 @@ export default async function Page({ params }: { params: { hash: string } }) {
             </div>
           )}
 
-          <div className="text-sm text-slate-600 py-2">
-            {data.post.likes} likes | {data.post.time.substring(0, 10)}
+          <div className="text-sm text-slate-500 py-2 pl-4">
+            {data.post.likes} likes • {data.post.comments} comments • {data.post.time.substring(0, 10)}
           </div>
           <div className="py-3 border-t border-slate-700 flex justify-evenly">
-            <Like hash={params.hash} />
+            <Like hash={params.hash} ulike={data.post.ulike} />
             <button className="text-green-400 text-xl">
               <FiMessageCircle />
             </button>

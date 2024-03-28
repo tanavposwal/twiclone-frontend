@@ -13,8 +13,6 @@ export default async function Post({ post }: {post: any}) {
     );
     info = res.data
 
-
-
   return (
     <Link href={"/post/hash/" + post.hash} key={post.hash}>
             <div className="w-full border-b border-slate-700 px-5 my-2">
@@ -46,9 +44,8 @@ export default async function Post({ post }: {post: any}) {
                 </div>
               )}
 
-              <div className="text-sm text-slate-500 py-2">
-                {post.likes} likes | {post.comments} comments |{" "}
-                {post.timestamp.substring(0, 10)}
+              <div className="text-sm text-slate-500 py-2 pl-4">
+                {post.likes} likes • {post.comments} comments • {post.timestamp.substring(0, 10)}
               </div>
             </div>
           </Link>
